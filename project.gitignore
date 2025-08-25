@@ -1,0 +1,17 @@
+# VS Code
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Node / build
+node_modules/
+dist/
+build/
+
+# Temp and logs
+*.log
+*.tmp
+*.bak
