@@ -5,25 +5,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Arpit Pandey | Portfolio</title>
+
+  <!-- External stylesheet -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Favicon -->
   <link rel="icon" href="Home Page/home.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Fugaz+One&display=swap"
-    rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Fugaz+One&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet" />
 </head>
 
 <body>
 
-  <!-- Loader -->
+  <!-- Loader (shown before page finishes loading) -->
   <div id="loader">
     <div class="spinner"></div>
     <p>Loading Arpit's Portfolio...</p>
   </div>
 
-  <!-- Logo to Home -->
+  <!-- Logo that links to Home -->
   <div class="logo-home">
     <a href="#home">
-      <img src="Home Page/assets/abstract.png" alt="Arpit Pandey">
+      <img src="Home Page/assets/home.png" alt="Arpit Pandey">
     </a>
   </div>
 
@@ -41,9 +46,12 @@
   <!-- Home Section -->
   <section id="home" class="section home glass-container">
     <div class="home-left">
+      <!-- Character image -->
       <div class="home-image-container">
         <img src="Home Page/DevImg2.png" alt="Character Image" />
       </div>
+
+      <!-- Name & intro -->
       <div class="home-info">
         <div class="name">Arpit Pandey</div>
         <p class="about">
@@ -52,6 +60,8 @@
         </p>
       </div>
     </div>
+
+    <!-- Highlights section -->
     <div class="home-right">
       <section class="highlights">
         <h2>Highlights</h2>
@@ -64,6 +74,9 @@
       </section>
     </div>
   </section>
+
+  <!-- About Section -->
+<!-- Keep everything same until the About Section -->
 
 <!-- About Section -->
 <section id="about" class="section about">
@@ -81,7 +94,7 @@
             <a href="https://github.com/apandey-9046" target="_blank">
               <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" />
             </a>
-            <a href="https://linkedin.com/in/apandey9046" target="_blank">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">
               <img src="https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg" alt="LinkedIn" />
             </a>
           </div>
@@ -92,52 +105,55 @@
         </div>
       </div>
 
-      <!-- Right: About & Skills -->
-      <div class="about-skills-column">
-        <!-- About Text -->
-        <div class="about-text">
-          <h2>About Me</h2>
-          <p>
-            I am a dedicated programmer with a keen interest in full-stack development.
-            I enjoy building projects that solve real-world problems and learning new
-            frameworks and languages. Collaboration, creativity, and continuous learning
-            are my driving forces as I strive to deliver impactful and elegant code
-            solutions for every challenge.
-          </p>
+        <!-- Right column: About text & skills -->
+        <div class="about-skills-column">
+          <!-- About text -->
+          <div class="about-text">
+            <h2>About Me</h2>
+            <p>
+              I am a dedicated programmer with a keen interest in full-stack development.
+              I enjoy building projects that solve real-world problems and learning new
+              frameworks and languages. Collaboration, creativity, and continuous learning
+              are my driving forces as I strive to deliver impactful and elegant code
+              solutions for every challenge.
+            </p>
+          </div>
+
+          <!-- Skills grid -->
+          <div class="skills-section">
+            <div class="skills-card">
+              <img src="https://img.icons8.com/color/96/html-5.png" alt="HTML" />
+              <h3>HTML</h3>
+              <p>Expert in creating structured, semantic web pages with responsive layouts.</p>
+            </div>
+            <div class="skills-card">
+              <img src="https://img.icons8.com/color/96/css3.png" alt="CSS" />
+              <h3>CSS</h3>
+              <p>Skilled in styling modern websites, animations, and responsive designs.</p>
+            </div>
+            <div class="skills-card">
+              <img src="https://img.icons8.com/color/96/javascript.png" alt="JavaScript" />
+              <h3>JavaScript</h3>
+              <p>Currently learning JS for interactive web pages, DOM manipulation, and ES6+ features.</p>
+            </div>
+            <div class="skills-card">
+              <img src="https://img.icons8.com/color/96/python.png" alt="Python" />
+              <h3>Python</h3>
+              <p>Proficient in Python for scripting, automation, and problem-solving tasks.</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Skills Grid -->
-        <div class="skills-section">
-          <div class="skills-card">
-            <img src="https://img.icons8.com/color/96/html-5.png" alt="HTML" />
-            <h3>HTML</h3>
-            <p>Expert in creating structured, semantic web pages with responsive layouts.</p>
-          </div>
-          <div class="skills-card">
-            <img src="https://img.icons8.com/color/96/css3.png" alt="CSS" />
-            <h3>CSS</h3>
-            <p>Skilled in styling modern websites, animations, and responsive designs.</p>
-          </div>
-          <div class="skills-card">
-            <img src="https://img.icons8.com/color/96/javascript.png" alt="JavaScript" />
-            <h3>JavaScript</h3>
-            <p>Currently learning JS for interactive web pages, DOM manipulation, and ES6+ features.</p>
-          </div>
-          <div class="skills-card">
-            <img src="https://img.icons8.com/color/96/python.png" alt="Python" />
-            <h3>Python</h3>
-            <p>Proficient in Python for scripting, automation, and problem-solving tasks.</p>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Resume Section -->
   <section id="resume" class="section resume">
     <div class="resume-card glass-container">
       <div class="resume-content">
+
+        <!-- Left: Resume info + download -->
         <div class="resume-left">
           <h2>My Resume</h2>
           <p>Explore my detailed resume which includes my education, skills, projects, and experiences.</p>
@@ -145,6 +161,8 @@
             <button class="resume-btn">⬇️ Download Resume</button>
           </a>
         </div>
+
+        <!-- Right: Character image -->
         <div class="resume-image">
           <img src="resume Page/char2.png" alt="Resume Character" />
         </div>
@@ -152,24 +170,23 @@
     </div>
   </section>
 
+  <!-- Projects Section -->
+  <section id="projects" class="section projects">
+    <div class="projects-card glass-container">
+      <div class="projects-content">
 
-<!-- Projects Section -->
-<section id="projects" class="section projects">
-  <div class="projects-card glass-container">
-    <div class="projects-content">
-      
-      <!-- Left: Character Image -->
-      <div class="character-container">
-        <div class="character-border">
-          <img src="About me Page/char_img2.png" alt="Character Image" />
+        <!-- Left: Decorative character -->
+        <div class="character-container">
+          <div class="character-border">
+            <img src="About me Page/char_img2.png" alt="Character Image" />
+          </div>
         </div>
-      </div>
 
       <!-- Right: Projects List -->
       <div class="projects-right">
         <h2>My Projects</h2>
         <div class="projects-grid">
-          <a href="#" target="_blank" class="project-link">
+          <a href="to_do_app.html" target="_blank" class="project-link">
             <div class="project-card">
               <img src="Projects Page/logo1.png" alt="Task Manager App" />
               <div class="project-info">
@@ -214,44 +231,44 @@
             </div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="contact-card glass-container">
+      <div class="contact-content">
 
+        <!-- Left: Contact form -->
+        <div class="contact-left">
+          <h2>Get In Touch</h2>
+          <hr />
+          <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="672fca0d-9bed-481b-bfc9-8d525520acf7">
+            <input type="text" name="name" placeholder="Your Name" class="contact-input" required />
+            <input type="email" name="email" placeholder="Your Email" class="contact-input" required />
+            <textarea name="message" placeholder="Your Message" class="contact-input textarea" required></textarea>
+            <button type="submit" class="submit-btn">
+              Send Message <img src="contact-me Page/Send_button.png" alt="" />
+            </button>
+          </form>
+        </div>
 
-<!-- Contact Section -->
-<section id="contact" class="section contact">
-  <div class="contact-card glass-container">
-    <div class="contact-content">
-      
-      <!-- Left: Form -->
-      <div class="contact-left">
-        <h2>Get In Touch</h2>
-        <hr />
-        <form action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="672fca0d-9bed-481b-bfc9-8d525520acf7">
-          <input type="text" name="name" placeholder="Your Name" class="contact-input" required />
-          <input type="email" name="email" placeholder="Your Email" class="contact-input" required />
-          <textarea name="message" placeholder="Your Message" class="contact-input textarea" required></textarea>
-          <button type="submit" class="submit-btn">Submit <img src="contact-me Page/arrow_icon.png" alt="" /></button>
-        </form>
+        <!-- Right: Decorative image -->
+        <div class="contact-right">
+          <div class="image-overlay"></div>
+          <img src="contact-me Page/contact.png" alt="Contact Image" />
+        </div>
+
       </div>
-
-      <!-- Right: Image -->
-      <div class="contact-right">
-        <div class="image-overlay"></div>
-        <img src="contact-me Page/contact.png" alt="Contact Image" />
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Scripts -->
+  <!-- Scripts -->
   <script>
+    // Smooth scroll for internal navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -261,21 +278,11 @@
       });
     });
 
+    // Hide loader once page finishes loading
     window.addEventListener("load", () => {
       document.getElementById("loader").style.display = "none";
     });
-
-    document.querySelectorAll('a[href*="t.me"]').forEach(link => {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.getElementById('telegram-popup').style.display = 'flex';
-      });
-    });
-
-    document.querySelector('.close').addEventListener('click', () => {
-      document.getElementById('telegram-popup').style.display = 'none';
-    });
   </script>
-</body>
 
+</body>
 </html>
