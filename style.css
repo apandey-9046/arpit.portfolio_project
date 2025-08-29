@@ -1854,6 +1854,5 @@ footer>div:last-child p {
 
   .skills-section {
     grid-template-columns: 1fr;
-    /* 1 column if very narrow */
   }
 }
