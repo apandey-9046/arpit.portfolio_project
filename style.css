@@ -16,7 +16,8 @@ body {
 
 /* ==================== GLASSY CONTAINERS ==================== */
 .glass-container {
-  background: rgba(253, 241, 203, 0.3); /* #fdf1cb - soft cream glass */
+  background: rgba(253, 241, 203, 0.3);
+  /* #fdf1cb - soft cream glass */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
@@ -42,7 +43,8 @@ body {
   width: 70%;
   max-width: 600px;
   height: 50px;
-  background: rgba(90, 85, 31, 0.9); /* #5a551f with opacity */
+  background: rgba(90, 85, 31, 0.9);
+  /* #5a551f with opacity */
   color: #d3ceba;
   border: 1px solid #5a551f;
   border-radius: 30px;
@@ -71,7 +73,8 @@ body {
 
 .navbar ul li a:hover {
   color: #5a551f;
-  background: #f7f2ab; /* hover highlight */
+  background: #f7f2ab;
+  /* hover highlight */
 }
 
 /* ==================== HOME SECTION ==================== */
@@ -168,7 +171,6 @@ body {
 }
 
 /* ==================== ABOUT SECTION ==================== */
-/* ==================== ABOUT SECTION ==================== */
 #about {
   padding-top: 100px;
   max-width: 1200px;
@@ -233,8 +235,8 @@ body {
 }
 
 .logo-font {
-  font-family: "Grand Hotel", cursive;
-  font-size: 36px;
+  font-family: "monospace", cursive;
+  font-size: 26px;
   margin-top: 15px;
   color: #5a551f;
 }
@@ -247,8 +249,8 @@ body {
 }
 
 .profile-socials a img {
-  width: 36px;
-  height: 36px;
+  width: 50px;
+  height: 50px;
   transition: transform 0.3s ease;
   border-radius: 50%;
 }
@@ -345,6 +347,7 @@ body {
 
   .profile-column {
     margin-bottom: 30px;
+
   }
 
   .about-text,
@@ -356,6 +359,7 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
 /* ==================== RESUME SECTION ==================== */
 #resume {
   padding-top: 120px;
@@ -439,7 +443,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px;
-  background: rgba(253, 241, 203, 0.3); /* #fdf1cb */
+  background: rgba(253, 241, 203, 0.3);
+  /* #fdf1cb */
   border: 1.6px solid #5a551f;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -612,7 +617,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px;
-  background: rgba(253, 241, 203, 0.3); /* #fdf1cb */
+  background: rgba(253, 241, 203, 0.3);
+  /* #fdf1cb */
   border: 1.6px solid #5a551f;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
@@ -791,6 +797,7 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -815,6 +822,7 @@ body {
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 900px) {
+
   .contact-container,
   #home,
   .projects-section,
@@ -855,4 +863,38 @@ body {
     left: 15px;
     top: 15px;
   }
+}
+
+
+/* ================ FOOTER SECTION =============== */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #5a551f;
+  color: #f1f1f0;
+  margin-top: 40px;
+}
+
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.social-icons img {
+  margin-left: 50px;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #5a551f;
+  padding: 5px;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }

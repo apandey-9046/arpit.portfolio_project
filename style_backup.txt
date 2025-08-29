@@ -168,23 +168,44 @@ body {
 }
 
 /* ==================== ABOUT SECTION ==================== */
+/* ==================== ABOUT SECTION ==================== */
 #about {
   padding-top: 100px;
   max-width: 1200px;
   margin: auto;
 }
 
-.about-container {
+.about-glass {
+  padding: 40px;
+  background: rgba(253, 241, 203, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.6px solid #5a551f;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.about-glass:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: #bda734;
+}
+
+.about-content {
   display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 40px;
-  padding: 40px 20px;
-  flex-wrap: wrap;
+}
+
+.profile-column {
+  flex: 0 0 300px;
 }
 
 .profile-card {
-  flex: 0 0 300px;
   background: #fdf1cb;
   border: 2px solid #5a551f;
   border-radius: 20px;
@@ -243,11 +264,12 @@ body {
   color: #5a551f;
 }
 
-.about-column {
+.about-skills-column {
   flex: 1;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .about-text {
@@ -274,30 +296,10 @@ body {
   color: #5a551f;
 }
 
-.view-btn {
-  background: #5a551f;
-  color: #d3ceba;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.view-btn:hover {
-  background: #d3ceba;
-  color: #5a551f;
-}
-
 .skills-section {
-  display: flex;
-  gap: 24px;
-  margin-top: -383px;
-  margin-bottom: 10px;
-  margin-left: 350px;
-  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .skills-card {
@@ -305,7 +307,6 @@ body {
   border: 1px solid #5a551f;
   border-radius: 16px;
   padding: 20px;
-  width: 180px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
@@ -334,6 +335,27 @@ body {
   line-height: 1.5;
 }
 
+/* ==================== RESPONSIVE FOR ABOUT ==================== */
+@media (max-width: 900px) {
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-column {
+    margin-bottom: 30px;
+  }
+
+  .about-text,
+  .skills-section {
+    width: 100%;
+  }
+
+  .skills-section {
+    grid-template-columns: 1fr;
+  }
+}
 /* ==================== RESUME SECTION ==================== */
 #resume {
   padding-top: 120px;
@@ -406,7 +428,7 @@ body {
   transform: scale(1.04);
 }
 
-/* ==================== PROJECTS SECTION ==================== */
+
 /* ==================== PROJECTS SECTION ==================== */
 #projects {
   padding-top: 120px;
