@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase | Modern E-Commerce</title>
+    <link rel="stylesheet" href="/My_Projects/E-Commerce.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2 id="authTitle">Sign In</h2>
+                <span class="close-modal" id="closeModal">&times;</span>
+            </div>
+            <div class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                </div>
+                <button class="btn btn-primary" id="authSubmit">Sign In</button>
+                <div class="auth-footer">
+                    <p id="authSwitchText">Don't have an account? <a href="#" id="authSwitch">Sign Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo" onclick="showPage('home')">Shop<span>Ease</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('categories')">Categories</a></li>
+                <li><a href="#" onclick="showPage('products')">Products</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#" onclick="showPage('search')"><i class="fas fa-search"></i></a>
+                <a href="#" onclick="openAuthModal()"><i class="fas fa-user"></i></a>
+                <a href="#" class="cart-count" onclick="showPage('cart')"><i class="fas fa-shopping-cart"></i></a>
+            </div>
+
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div class="page active" id="home">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Shop the Latest Trends</h1>
+                    <p>Discover amazing products at unbeatable prices. Free shipping on orders over $50.</p>
+                    <div class="hero-btns">
+                        <a href="#" class="btn btn-primary" onclick="showPage('products')">Shop Now</a>
+                        <a href="#" class="btn btn-outline" onclick="showPage('categories')">View Categories</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="section categories">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Shop by Category</h2>
+                    <p>Browse our wide range of categories to find exactly what you need</p>
+                </div>
+
+                <div class="category-grid" id="homeCategories">
+                    <!-- Categories will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="section products">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured Products</h2>
+                    <p>Discover our most popular products loved by customers</p>
+                </div>
+
+                <div class="product-grid" id="featuredProducts">
+                    <!-- Products will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose Us</h2>
+                    <p>We provide the best shopping experience for our customers</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Free Shipping</h3>
+                        <p>Free delivery on all orders over $50. Fast and reliable shipping.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Easy Returns</h3>
+                        <p>30-day return policy. Return or exchange any product easily.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure Payment</h3>
+                        <p>Your payment information is secure with our advanced encryption.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>24/7 Support</h3>
+                        <p>Our customer support team is available around the clock.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get the latest updates on new products and upcoming sales</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email address" id="newsletterEmail">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Categories Page -->
+    <div class="page" id="categories">
+        <div class="page-header">
+            <div class="container">
+                <h1>Product Categories</h1>
+                <p>Browse our wide selection of products by category</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container category-page">
+                <div class="category-grid" id="allCategories">
+                    <!-- Categories will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Page -->
+    <div class="page" id="products">
+        <div class="page-header">
+            <div class="container">
+                <h1>All Products</h1>
+                <p>Discover our complete collection of products</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="categoryFilter">Category:</label>
+                        <select id="categoryFilter">
+                            <option value="all">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="priceFilter">Price Range:</label>
+                        <select id="priceFilter">
+                            <option value="all">All Prices</option>
+                            <option value="0-50">$0 - $50</option>
+                            <option value="50-100">$50 - $100</option>
+                            <option value="100-200">$100 - $200</option>
+                            <option value="200+">$200+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sortFilter">Sort By:</label>
+                        <select id="sortFilter">
+                            <option value="default">Default</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name">Name: A to Z</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="allProducts">
+                    <!-- Products will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Page -->
+    <div class="page" id="category">
+        <div class="page-header">
+            <div class="container">
+                <h1 id="categoryTitle">Category</h1>
+                <p>Browse products in this category</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container">
+                <div class="product-grid" id="categoryProducts">
+                    <!-- Products will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Page -->
+    <div class="page" id="about">
+        <div class="page-header">
+            <div class="container">
+                <h1>About Us</h1>
+                <p>Learn more about our company and mission</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2015, ShopEase began with a simple mission: to make online shopping accessible,
+                            enjoyable, and affordable for everyone. What started as a small team of tech enthusiasts has
+                            grown into a leading e-commerce platform serving customers worldwide.</p>
+
+                        <h2>Our Mission</h2>
+                        <p>We believe that everyone deserves access to quality products without breaking the bank. Our
+                            mission is to connect customers with the best products at competitive prices while providing
+                            an exceptional shopping experience from browsing to delivery.</p>
+
+                        <h2>Why Choose Us</h2>
+                        <ul>
+                            <li>Wide selection of high-quality products</li>
+                            <li>Competitive pricing and regular discounts</li>
+                            <li>Fast and reliable shipping</li>
+                            <li>Easy returns and exchanges</li>
+                            <li>24/7 customer support</li>
+                            <li>Secure payment options</li>
+                        </ul>
+                    </div>
+                    <div class="about-image">
+                        <i class="fas fa-store"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="page" id="contact">
+        <div class="page-header">
+            <div class="container">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container">
+                <div class="contact-form">
+                    <div class="form-group">
+                        <label for="contactName">Full Name</label>
+                        <input type="text" id="contactName" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" placeholder="Enter subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" placeholder="Enter your message"></textarea>
+                    </div>
+                    <button class="btn btn-primary" id="sendMessageBtn">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Page -->
+    <div class="page" id="cart">
+        <div class="page-header">
+            <div class="container">
+                <h1>Your Shopping Cart</h1>
+                <p>Review and manage your items</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container">
+                <div class="cart-container">
+                    <div class="cart-items" id="cartItems">
+                        <!-- Cart items will be populated by JavaScript -->
+                    </div>
+
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal">$0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span id="cartShipping">Free</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax</span>
+                            <span id="cartTax">$0.00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total</span>
+                            <span id="cartTotal">$0.00</span>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;" id="checkoutBtn">Proceed to
+                            Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Page -->
+    <div class="page" id="search">
+        <div class="page-header">
+            <div class="container">
+                <h1>Search Results</h1>
+                <p>Products matching your search</p>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div class="container">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search products...">
+                    <button class="btn btn-primary" id="searchBtn">Search</button>
+                </div>
+                <div class="product-grid" id="searchResults">
+                    <!-- Search results will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>ShopEase</h3>
+                    <p>Your one-stop destination for all your shopping needs. We offer quality products at competitive
+                        prices with excellent customer service.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#" onclick="showPage('products')">Shop</a></li>
+                        <li><a href="#" onclick="showPage('categories')">Categories</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Order Tracking</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Shopping Street, Retail City, RC 10001</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>support@shopease.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Mon-Fri: 9AM - 6PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="copyright">© 2025 Arpit Pandey. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/My_Projects/E-Commerce.js"></script>
+</body>
+
+</html>

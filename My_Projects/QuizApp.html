@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App | Arpit Pandey </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4a44b5;
+            --accent: #ff6584;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #6c63ff, #ff6584);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .timer i {
+            color: var(--accent);
+        }
+
+        .question-counter {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .option.selected {
+            background: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.5);
+        }
+
+        .option.correct {
+            background: rgba(74, 222, 128, 0.2);
+            border: 2px solid var(--success);
+        }
+
+        .option.incorrect {
+            background: rgba(248, 113, 113, 0.2);
+            border: 2px solid var(--danger);
+        }
+
+        .option-prefix {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            font-weight: 600;
+        }
+
+        .option.selected .option-prefix {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            background: var(--primary);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn:disabled {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-prev {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-prev:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #6c63ff, #ff6584);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .score {
+            font-size: 5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            background: linear-gradient(to right, #6c63ff, #ff6584);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .performance {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .performance.excellent {
+            color: var(--success);
+        }
+
+        .performance.good {
+            color: var(--warning);
+        }
+
+        .performance.poor {
+            color: var(--danger);
+        }
+
+        .progress-container {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 5px;
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--accent);
+        }
+
+        .restart-btn:hover {
+            background: #ff4d70;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .options-container {
+                gap: 12px;
+            }
+
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Knowledge Challenge</h1>
+            <p>Test your skills with our modern quiz app</p>
+        </div>
+
+        <div class="glass-card">
+            <div class="quiz-info">
+                <div class="timer">
+                    <i class="fas fa-clock"></i>
+                    <span id="time">20:00</span>
+                </div>
+                <div class="question-counter">
+                    Question <span id="current-question">1</span> of <span id="total-questions">20</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="question">Loading question...</h2>
+
+                <div class="options-container" id="options">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-prev" id="prev-btn">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <button class="btn" id="next-btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="glass-card result-container" id="result-container" style="display: none;">
+            <div class="result-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2>Your Quiz Results</h2>
+            <div class="score" id="score">0/20</div>
+            <div class="performance" id="performance">Performance: Excellent!</div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <p>You answered <span id="correct-answers">0</span> questions correctly out of 20.</p>
+            <p>Time taken: <span id="time-taken">00:00</span></p>
+
+            <button class="btn restart-btn" id="restart-btn">
+                <i class="fas fa-redo"></i> Restart Quiz
+            </button>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Arpit Pandey. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions data
+        const quizData = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Rome"],
+                correct: 2
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                options: ["Venus", "Mars", "Jupiter", "Saturn"],
+                correct: 1
+            },
+            {
+                question: "What is the largest mammal in the world?",
+                options: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+                correct: 1
+            },
+            {
+                question: "Which element has the chemical symbol 'O'?",
+                options: ["Gold", "Oxygen", "Osmium", "Oganesson"],
+                correct: 1
+            },
+            {
+                question: "Who painted the Mona Lisa?",
+                options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
+                correct: 2
+            },
+            {
+                question: "What is the smallest prime number?",
+                options: ["0", "1", "2", "3"],
+                correct: 2
+            },
+            {
+                question: "Which ocean is the largest?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                correct: 3
+            },
+            {
+                question: "What is the hardest natural substance on Earth?",
+                options: ["Gold", "Iron", "Diamond", "Platinum"],
+                correct: 2
+            },
+            {
+                question: "How many bones are in the human body?",
+                options: ["206", "300", "150", "187"],
+                correct: 0
+            },
+            {
+                question: "Which country is known as the Land of the Rising Sun?",
+                options: ["China", "Japan", "South Korea", "Thailand"],
+                correct: 1
+            },
+            {
+                question: "What is the main ingredient in guacamole?",
+                options: ["Tomato", "Avocado", "Onion", "Pepper"],
+                correct: 1
+            },
+            {
+                question: "Which gas is most abundant in the Earth's atmosphere?",
+                options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+                correct: 2
+            },
+            {
+                question: "What is the currency of Japan?",
+                options: ["Yuan", "Won", "Yen", "Ringgit"],
+                correct: 2
+            },
+            {
+                question: "Which planet has the most moons?",
+                options: ["Jupiter", "Saturn", "Uranus", "Neptune"],
+                correct: 1
+            },
+            {
+                question: "What is the largest organ in the human body?",
+                options: ["Heart", "Liver", "Skin", "Lungs"],
+                correct: 2
+            },
+            {
+                question: "Who wrote 'Romeo and Juliet'?",
+                options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+                correct: 1
+            },
+            {
+                question: "What is the tallest mammal?",
+                options: ["Elephant", "Giraffe", "Hippopotamus", "Rhinoceros"],
+                correct: 1
+            },
+            {
+                question: "Which is the longest river in the world?",
+                options: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"],
+                correct: 1
+            },
+            {
+                question: "What is the freezing point of water in Celsius?",
+                options: ["0°C", "32°C", "100°C", "-10°C"],
+                correct: 0
+            },
+            {
+                question: "Which metal is liquid at room temperature?",
+                options: ["Iron", "Mercury", "Lead", "Aluminum"],
+                correct: 1
+            }
+        ];
+
+        // DOM Elements
+        const questionElement = document.getElementById('question');
+        const optionsContainer = document.getElementById('options');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentQuestionElement = document.getElementById('current-question');
+        const totalQuestionsElement = document.getElementById('total-questions');
+        const timeElement = document.getElementById('time');
+        const resultContainer = document.getElementById('result-container');
+        const scoreElement = document.getElementById('score');
+        const performanceElement = document.getElementById('performance');
+        const correctAnswersElement = document.getElementById('correct-answers');
+        const timeTakenElement = document.getElementById('time-taken');
+        const progressBar = document.getElementById('progress-bar');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = Array(quizData.length).fill(null);
+        let score = 0;
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+        let timerInterval;
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsElement.textContent = quizData.length;
+            loadQuestion();
+            startTimer();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = quizData[currentQuestion];
+            questionElement.textContent = question.question;
+            currentQuestionElement.textContent = currentQuestion + 1;
+
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+
+            // Create new options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
+                }
+
+                optionElement.innerHTML = `
+                    <div class="option-prefix">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+
+                optionElement.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(optionElement);
+            });
+
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Submit' : 'Next';
+            nextBtn.innerHTML = currentQuestion === quizData.length - 1 ?
+                'Submit <i class="fas fa-paper-plane"></i>' :
+                'Next <i class="fas fa-arrow-right"></i>';
+        }
+
+        // Select an option
+        function selectOption(index) {
+            userAnswers[currentQuestion] = index;
+
+            // Update UI
+            document.querySelectorAll('.option').forEach((option, i) => {
+                if (i === index) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        // Start the timer
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimeDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Update time display
+        function updateTimeDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timeElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // Change color when time is running low
+            if (timeLeft < 60) {
+                timeElement.style.color = '#f87171';
+            } else {
+                timeElement.style.color = '';
+            }
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            clearInterval(timerInterval);
+
+            // Calculate score
+            score = 0;
+            quizData.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    score++;
+                }
+            });
+
+            // Show results
+            showResults();
+        }
+
+        // Show results
+        function showResults() {
+            // Hide quiz container and show results
+            document.querySelector('.glass-card').style.display = 'none';
+            resultContainer.style.display = 'block';
+
+            // Calculate time taken
+            const timeTaken = 20 * 60 - timeLeft;
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            timeTakenElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // Update score and performance
+            scoreElement.textContent = `${score}/${quizData.length}`;
+            correctAnswersElement.textContent = score;
+
+            // Determine performance
+            const percentage = (score / quizData.length) * 100;
+            let performanceText = '';
+            let performanceClass = '';
+
+            if (percentage >= 80) {
+                performanceText = 'Excellent!';
+                performanceClass = 'excellent';
+            } else if (percentage >= 60) {
+                performanceText = 'Good Job!';
+                performanceClass = 'good';
+            } else {
+                performanceText = 'Keep Practicing!';
+                performanceClass = 'poor';
+            }
+
+            performanceElement.textContent = `Performance: ${performanceText}`;
+            performanceElement.className = `performance ${performanceClass}`;
+
+            // Animate progress bar
+            setTimeout(() => {
+                progressBar.style.width = `${percentage}%`;
+            }, 300);
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = Array(quizData.length).fill(null);
+            score = 0;
+            timeLeft = 20 * 60;
+
+            // Hide results and show quiz
+            resultContainer.style.display = 'none';
+            document.querySelector('.glass-card').style.display = 'block';
+
+            // Reset UI
+            timeElement.style.color = '';
+            updateTimeDisplay();
+            loadQuestion();
+            startTimer();
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextQuestion);
+        prevBtn.addEventListener('click', prevQuestion);
+        restartBtn.addEventListener('click', restartQuiz);
+
+        // Initialize the quiz
+        initQuiz();
+    </script>
+</body>
+
+</html>

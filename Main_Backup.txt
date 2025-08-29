@@ -13,7 +13,8 @@
   <link rel="icon" href="Home Page/home.png" type="image/png">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Fugaz+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Fugaz+One&display=swap"
+    rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet" />
 </head>
 
@@ -74,36 +75,34 @@
       </section>
     </div>
   </section>
+  <!-- End of Home Section -->
 
   <!-- About Section -->
-<!-- Keep everything same until the About Section -->
-
-<!-- About Section -->
-<section id="about" class="section about">
-  <div class="glass-container about-glass">
-    <div class="about-content">
-      <!-- Left: Profile Card -->
-      <div class="profile-column">
-        <div class="profile-card">
-          <img src="About me Page/arpit-circle-trans.png" alt="Profile" />
-          <h2 class="logo-font">Arpit Pandey</h2>
-          <div class="profile-socials">
-            <a href="https://t.me/http_peace" target="_blank">
-              <img src="About me Page/Telegram_logo.png" alt="Telegram" />
-            </a>
-            <a href="https://github.com/apandey-9046" target="_blank">
-              <img src="About me Page/github.png" alt="GitHub" />
-            </a>
-            <a href="https://linkedin.com/in/apandey9046" target="_blank">
-              <img src="About me Page/LinkedIn icon.png" alt="LinkedIn" />
-            </a>
+  <section id="about" class="section about">
+    <div class="glass-container about-glass">
+      <div class="about-content">
+        <!-- Left: Profile Card -->
+        <div class="profile-column">
+          <div class="profile-card">
+            <img src="About me Page/arpit-circle-trans.png" alt="Profile" />
+            <h2 class="logo-font">Arpit Pandey</h2>
+            <div class="profile-socials">
+              <a href="https://t.me/http_peace" target="_blank">
+                <img src="About me Page/Telegram_logo.png" alt="Telegram" />
+              </a>
+              <a href="https://github.com/apandey-9046" target="_blank">
+                <img src="About me Page/github.png" alt="GitHub" />
+              </a>
+              <a href="https://linkedin.com/in/apandey9046" target="_blank">
+                <img src="About me Page/LinkedIn icon.png" alt="LinkedIn" />
+              </a>
+            </div>
+            <p>
+              Passionate coder with a love for creating elegant, efficient solutions.
+              I specialize in web development and love exploring new technologies.
+            </p>
           </div>
-          <p>
-            Passionate coder with a love for creating elegant, efficient solutions.
-            I specialize in web development and love exploring new technologies.
-          </p>
         </div>
-      </div>
 
         <!-- Right column: About text & skills -->
         <div class="about-skills-column">
@@ -170,70 +169,72 @@
     </div>
   </section>
 
+  <!-- end of Resume Section --> -->
+
   <!-- Projects Section -->
   <section id="projects" class="section projects">
     <div class="projects-card glass-container">
       <div class="projects-content">
 
-        <!-- Left: Decorative character -->
+        <!-- Left character -->
         <div class="character-container">
           <div class="character-border">
             <img src="About me Page/Char_Img_Projects.png" alt="Character Image" />
           </div>
         </div>
 
-      <!-- Right: Projects List -->
-      <div class="projects-right">
-        <h2>My Projects</h2>
-        <div class="projects-grid">
-          <a href="to_do_app.html" target="_blank" class="project-link">
+        <!-- Right: Projects List -->
+        <div class="projects-right">
+          <h2>My Projects</h2>
+          <div class="projects-grid">
+            <a href="#" target="_blank" class="project-link">
+              <div class="project-card">
+                <img src="Projects Page/logo1.png" alt="Task Manager App" />
+                <div class="project-info">
+                  <h3>Task Manager App</h3>
+                  <p>A simple app to manage your daily tasks efficiently.</p>
+                </div>
+              </div>
+            </a>
             <div class="project-card">
-              <img src="Projects Page/logo1.png" alt="Task Manager App" />
+              <img src="Projects Page/logo2.png" alt="Portfolio Website" />
               <div class="project-info">
-                <h3>Task Manager App</h3>
-                <p>A simple app to manage your daily tasks efficiently.</p>
+                <h3>Portfolio Website</h3>
+                <p>Showcase personal projects and skills in a modern layout.</p>
               </div>
             </div>
-          </a>
-          <div class="project-card">
-            <img src="Projects Page/logo2.png" alt="Portfolio Website" />
-            <div class="project-info">
-              <h3>Portfolio Website</h3>
-              <p>Showcase personal projects and skills in a modern layout.</p>
+            <div class="project-card">
+              <img src="Projects Page/logo3.png" alt="E-Commerce Website" />
+              <div class="project-info">
+                <h3>E-Commerce Website</h3>
+                <p>Full-featured online shopping platform with cart & payment.</p>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="Projects Page/logo4.png" alt="Quiz App" />
+              <div class="project-info">
+                <h3>Quiz App</h3>
+                <p>Interactive quiz platform with timer and scoring.</p>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="Projects Page/logo5.png" alt="Professional Dashboard" />
+              <div class="project-info">
+                <h3>Professional Dashboard</h3>
+                <p>Interactive dashboard to visualize your business metrics.</p>
+              </div>
+            </div>
+            <div class="project-card">
+              <img src="Projects Page/logo6.png" alt="Expense Manager" />
+              <div class="project-info">
+                <h3>Expense Manager</h3>
+                <p>Track income, expenses, and visualize spending trends.</p>
+              </div>
             </div>
           </div>
-          <div class="project-card">
-            <img src="Projects Page/logo3.png" alt="E-Commerce Website" />
-            <div class="project-info">
-              <h3>E-Commerce Website</h3>
-              <p>Full-featured online shopping platform with cart & payment.</p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="Projects Page/logo4.png" alt="Quiz App" />
-            <div class="project-info">
-              <h3>Quiz App</h3>
-              <p>Interactive quiz platform with timer and scoring.</p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="Projects Page/logo5.png" alt="Professional Dashboard" />
-            <div class="project-info">
-              <h3>Professional Dashboard</h3>
-              <p>Interactive dashboard to visualize your business metrics.</p>
-            </div>
-          </div>
-          <div class="project-card">
-            <img src="Projects Page/logo6.png" alt="Expense Manager" />
-            <div class="project-info">
-              <h3>Expense Manager</h3>
-              <p>Track income, expenses, and visualize spending trends.</p>
-            </div>
-          </div>
-        </div>
 
+        </div>
       </div>
-    </div>
   </section>
 
   <!-- Contact Section -->
@@ -266,6 +267,25 @@
     </div>
   </section>
 
+  <footer>
+
+    <h3>Stay Connected</h3>
+    <div class="social-icons">
+      <a href="https://github.com/apandey-9046"><img src="footer Section/github.png" alt="Github"></a>
+      <a href="https://linkedin.com/in/apandey9046"><img src="footer Section/linkedin.png" alt="LinkedIn"></a>
+      <a href="https://t.me/+FoLaD-ud2wAwNzI9"><img src="footer Section/telegram.png" alt="Telegram"></a>
+      <a href="#"><img src="footer Section/youtube.png" alt="YouTube"></a>
+      <a href="https://ig.me/j/AbZMIMxRTmxS27NT/"><img src="footer Section/instagram.png" alt="Instagram"></a>
+      <a href="https://whatsapp.com/channel/0029VbBErFf1SWt2lLa1mQ1y"><img src="footer Section/whatsapp.png"
+          alt="WhatsApp"></a>
+      <a href="mailto:apandey9046.try@gmail.com"><img src="footer Section/email.png" alt="Mail"></a>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Arpit Pandey. All rights reserved.</p>
+    </footer>
+  </footer>
+
   <!-- Scripts -->
   <script>
     // Smooth scroll for internal navigation links
@@ -285,4 +305,5 @@
   </script>
 
 </body>
+
 </html>

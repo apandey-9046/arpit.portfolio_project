@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Manager | Arpit Pandey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6a5acd;
+            --secondary: #5d4ec2;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --dark: #0f172a;
+            --darker: #0c1220;
+            --light: #f1f5f9;
+            --glass: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--warning));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .user-info-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--light);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 15px;
+            background: rgba(15, 23, 42, 0.7);
+            color: var(--light);
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 0 2px var(--primary);
+            border-color: var(--primary);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(241, 245, 249, 0.6);
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 15px;
+            background: var(--primary);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .btn-warning:hover {
+            background: #f59e0b;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #ef4444;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--dark);
+        }
+
+        .btn-success:hover {
+            background: #22c55e;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .welcome-user {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .transaction-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .history-container {
+            margin-top: 25px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .history-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .history-list::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+
+        .history-list::-webkit-scrollbar-thumb {
+            background: rgba(106, 90, 205, 0.5);
+            border-radius: 10px;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            animation: slideIn 0.4s ease-out;
+            border: 1px solid var(--glass-border);
+        }
+
+        .history-item.expense {
+            border-left: 4px solid var(--danger);
+        }
+
+        .history-item.income {
+            border-left: 4px solid var(--success);
+        }
+
+        .history-details {
+            flex: 1;
+        }
+
+        .history-amount {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .history-amount.expense {
+            color: var(--danger);
+        }
+
+        .history-amount.income {
+            color: var(--success);
+        }
+
+        .history-date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .history-actions button {
+            background: none;
+            border: none;
+            color: rgba(241, 245, 249, 0.7);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .history-actions button:hover {
+            background: rgba(241, 245, 249, 0.1);
+            color: var(--light);
+        }
+
+        .delete-btn:hover {
+            background: rgba(248, 113, 113, 0.2) !important;
+            color: var(--danger) !important;
+        }
+
+        .empty-history {
+            text-align: center;
+            padding: 30px;
+            opacity: 0.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Hidden class for toggling views */
+        .hidden {
+            display: none !important;
+        }
+
+        /* SQL Data Display */
+        .sql-data {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--glass-border);
+        }
+
+        .sql-data h3 {
+            margin-bottom: 10px;
+            color: var(--success);
+        }
+
+        .sql-data pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #cbd5e1;
+        }
+
+        .export-btn {
+            margin-top: 15px;
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .export-btn:hover {
+            background: #f59e0b;
+        }
+
+        /* Currency symbol */
+        .currency-symbol {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Simple Expense Manager</h1>
+            <p>Track your income and expenses with ease</p>
+        </div>
+
+        <!-- User Info Section -->
+        <div class="glass-card user-info-form" id="user-info-section">
+            <h2>Enter Your Details</h2>
+            <div class="form-group">
+                <label for="user-name">Your Name</label>
+                <input type="text" id="user-name" placeholder="Enter your full name">
+            </div>
+            <button class="btn" id="start-btn">
+                <i class="fas fa-arrow-right"></i> Start Tracking
+            </button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="glass-card dashboard" id="dashboard-section">
+            <div class="dashboard-header">
+                <div class="welcome-user" id="welcome-message">Welcome, User!</div>
+            </div>
+
+            <div class="summary-stats">
+                <div class="stat-card">
+                    <div class="stat-label">Total Balance</div>
+                    <div class="stat-value"><span class="currency-symbol">₹</span><span id="total-balance">0.00</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Expenses</div>
+                    <div class="stat-value"><span class="currency-symbol">₹</span><span id="total-expenses">0.00</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Income</div>
+                    <div class="stat-value"><span class="currency-symbol">₹</span><span id="total-income">0.00</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Transactions</div>
+                    <div class="stat-value" id="transaction-count">0</div>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="transaction-form-container">
+                    <h3>Add New Transaction</h3>
+                    <form class="transaction-form" id="transaction-form">
+                        <div class="form-group">
+                            <label for="transaction-type">Transaction Type</label>
+                            <select id="transaction-type">
+                                <option value="expense">Expense</option>
+                                <option value="income">Income</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="transaction-mode">Mode</label>
+                                <select id="transaction-mode">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="online">Online</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="transaction-account">Account</label>
+                                <select id="transaction-account">
+                                    <option value="personal">Personal Account</option>
+                                    <option value="business">Business Account</option>
+                                    <option value="savings">Savings Account</option>
+                                    <option value="credit">Credit Card</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transaction-description">Description</label>
+                            <input type="text" id="transaction-description" placeholder="What was this for?">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transaction-amount">Amount (₹)</label>
+                            <input type="number" id="transaction-amount" placeholder="0.00" step="0.01" min="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transaction-date">Date</label>
+                            <input type="date" id="transaction-date">
+                        </div>
+
+                        <button class="btn" type="submit">
+                            <i class="fas fa-plus-circle"></i> Add Transaction
+                        </button>
+                    </form>
+                </div>
+
+                <div class="history-container">
+                    <div class="history-header">
+                        <h3>Transaction History</h3>
+                        <button class="btn btn-danger" id="clear-history">
+                            <i class="fas fa-trash-alt"></i> Clear All
+                        </button>
+                    </div>
+                    <div class="history-list" id="history-list">
+                        <div class="empty-history">
+                            <i class="fas fa-history fa-3x"></i>
+                            <p>No transactions yet. Add your first transaction!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SQL Data Display -->
+            <div class="sql-data">
+                <h3>SQL Data Export</h3>
+                <pre id="sql-output">-- No transactions yet</pre>
+                <button class="btn export-btn" id="export-btn">
+                    <i class="fas fa-download"></i> Export SQL Data
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Arpit Pandey. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const userInfoSection = document.getElementById('user-info-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const userNameInput = document.getElementById('user-name');
+        const startBtn = document.getElementById('start-btn');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const transactionForm = document.getElementById('transaction-form');
+        const historyList = document.getElementById('history-list');
+        const clearHistoryBtn = document.getElementById('clear-history');
+        const totalBalance = document.getElementById('total-balance');
+        const totalExpenses = document.getElementById('total-expenses');
+        const totalIncome = document.getElementById('total-income');
+        const transactionCount = document.getElementById('transaction-count');
+        const sqlOutput = document.getElementById('sql-output');
+        const exportBtn = document.getElementById('export-btn');
+
+        // State variables
+        let userName = '';
+        let transactions = [];
+        let sqlData = [];
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set today's date as default
+            document.getElementById('transaction-date').valueAsDate = new Date();
+
+            // Event Listeners
+            startBtn.addEventListener('click', startApp);
+            transactionForm.addEventListener('submit', addTransaction);
+            clearHistoryBtn.addEventListener('click', clearHistory);
+            exportBtn.addEventListener('click', exportSQL);
+        });
+
+        // Start the application
+        function startApp() {
+            userName = userNameInput.value.trim();
+
+            if (!userName) {
+                alert('Please enter your name');
+                return;
+            }
+
+            // Update welcome message
+            welcomeMessage.textContent = `Welcome, ${userName}!`;
+
+            // Hide user info section and show dashboard
+            userInfoSection.style.display = 'none';
+            dashboardSection.style.display = 'block';
+
+            // Load any existing data
+            loadTransactions();
+        }
+
+        // Transaction Functions
+        function addTransaction(e) {
+            e.preventDefault();
+
+            const type = document.getElementById('transaction-type').value;
+            const mode = document.getElementById('transaction-mode').value;
+            const account = document.getElementById('transaction-account').value;
+            const description = document.getElementById('transaction-description').value.trim();
+            const amount = parseFloat(document.getElementById('transaction-amount').value);
+            const date = document.getElementById('transaction-date').value;
+
+            if (!description || !amount || amount <= 0 || !date) {
+                alert('Please fill in all required fields with valid values');
+                return;
+            }
+
+            // Create transaction object
+            const transaction = {
+                id: Date.now(),
+                type: type,
+                mode: mode,
+                account: account,
+                description: description,
+                amount: amount,
+                date: date
+            };
+
+            // Add to transactions array
+            transactions.push(transaction);
+
+            // Generate SQL INSERT statement
+            const sqlStatement = `INSERT INTO transactions (id, type, mode, account, description, amount, date) 
+VALUES (${transaction.id}, '${transaction.type}', '${transaction.mode}', '${transaction.account}', 
+'${transaction.description}', ${transaction.amount}, '${transaction.date}');`;
+
+            sqlData.push(sqlStatement);
+
+            // Update UI
+            renderTransactions();
+            updateSummary();
+            updateSQLDisplay();
+
+            // Reset form
+            transactionForm.reset();
+            document.getElementById('transaction-date').valueAsDate = new Date();
+        }
+
+        function deleteTransaction(id) {
+            transactions = transactions.filter(transaction => transaction.id !== id);
+            sqlData = sqlData.filter(sql => !sql.includes(`id = ${id}`));
+            renderTransactions();
+            updateSummary();
+            updateSQLDisplay();
+        }
+
+        function renderTransactions() {
+            if (transactions.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-history">
+                        <i class="fas fa-history fa-3x"></i>
+                        <p>No transactions yet. Add your first transaction!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort transactions by date (newest first)
+            transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            historyList.innerHTML = '';
+
+            transactions.forEach(transaction => {
+                const transactionElement = document.createElement('div');
+                transactionElement.className = `history-item ${transaction.type}`;
+
+                // Format date for display
+                const formattedDate = new Date(transaction.date).toLocaleDateString();
+
+                transactionElement.innerHTML = `
+                    <div class="history-details">
+                        <div class="history-description">${transaction.description}</div>
+                        <div class="history-category">${transaction.mode} | ${transaction.account}</div>
+                        <div class="history-date">${formattedDate}</div>
+                    </div>
+                    <div class="history-amount ${transaction.type}">
+                        ${transaction.type === 'expense' ? '-' : '+'}₹${transaction.amount.toFixed(2)}
+                    </div>
+                    <div class="history-actions">
+                        <button class="delete-btn" data-id="${transaction.id}" title="Delete transaction">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+
+                historyList.appendChild(transactionElement);
+            });
+
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    deleteTransaction(id);
+                });
+            });
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all transactions? This cannot be undone.')) {
+                transactions = [];
+                sqlData = [];
+                renderTransactions();
+                updateSummary();
+                updateSQLDisplay();
+            }
+        }
+
+        // Summary Functions
+        function updateSummary() {
+            // Calculate totals
+            let income = 0;
+            let expenses = 0;
+
+            transactions.forEach(transaction => {
+                if (transaction.type === 'income') {
+                    income += transaction.amount;
+                } else {
+                    expenses += transaction.amount;
+                }
+            });
+
+            const balance = income - expenses;
+
+            // Update UI
+            totalBalance.textContent = balance.toFixed(2);
+            totalIncome.textContent = income.toFixed(2);
+            totalExpenses.textContent = expenses.toFixed(2);
+            transactionCount.textContent = transactions.length;
+        }
+
+        // SQL Data Functions
+        function updateSQLDisplay() {
+            if (sqlData.length === 0) {
+                sqlOutput.textContent = '-- No transactions yet';
+                return;
+            }
+
+            // Combine all SQL statements
+            sqlOutput.textContent = sqlData.join('\n\n');
+        }
+
+        function exportSQL() {
+            if (sqlData.length === 0) {
+                alert('No data to export');
+                return;
+            }
+
+            // Create SQL file content
+            const sqlContent = `
+-- Expense Manager SQL Export
+-- Generated on: ${new Date().toLocaleString()}
+-- User: ${userName}
+
+-- Create table if not exists
+CREATE TABLE IF NOT EXISTS transactions (
+    id INTEGER PRIMARY KEY,
+    type TEXT NOT NULL,
+    mode TEXT NOT NULL,
+    account TEXT NOT NULL,
+    description TEXT NOT NULL,
+    amount REAL NOT NULL,
+    date TEXT NOT NULL
+);
+
+-- Insert transactions
+${sqlData.join('\n\n')};
+
+-- End of export
+`;
+
+            // Create and download file
+            const blob = new Blob([sqlContent], { type: 'text/sql' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `expense_data_${new Date().toISOString().slice(0, 10)}.sql`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('SQL data exported successfully!');
+        }
+
+        // Data Persistence Functions
+        function loadTransactions() {
+            // In a real application, this would load from a database
+            // For this demo, we'll initialize with empty data
+            transactions = [];
+            sqlData = [];
+            renderTransactions();
+            updateSummary();
+            updateSQLDisplay();
+        }
+    </script>
+</body>
+
+</html>
